@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginTester", "PluginTester.csproj", "{0806B6A9-2D4E-414B-A5C7-6D235FA6B202}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0806B6A9-2D4E-414B-A5C7-6D235FA6B202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0806B6A9-2D4E-414B-A5C7-6D235FA6B202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0806B6A9-2D4E-414B-A5C7-6D235FA6B202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0806B6A9-2D4E-414B-A5C7-6D235FA6B202}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {265FA8BA-F32D-48CA-8601-CF22A039A37E}
+	EndGlobalSection
+EndGlobal
