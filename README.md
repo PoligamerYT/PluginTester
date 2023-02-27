@@ -8,10 +8,13 @@ automatically! (If you want to add or remove a plugin for the server you need to
 
 ## Supported OS
 - Windows ✔️
-- Linux  (Requieres Mono) ✔️
+- Linux  (Requieres [Mono]) ✔️
 - MacOS ❌
 
 ## Need Support?
 Write to my discord: PoliZZZ#0812
 
-Screenshot:
+## Screenshot:
+![Screenshot](https://i.imgur.com/gG2jYkr.png)
+  
+[Mono]: <https://www.mono-project.com/>
