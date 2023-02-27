@@ -1,5 +1,4 @@
 # PluginTester
-About this tool:
 This is a simple program made in C# that helps you test your plugin in different versions of the Game (1.8-1.19), creating servers in a specific Version and Server Type (Paper, Bukkit, Spigot) of the game of your selection.
 
 ## How to use
