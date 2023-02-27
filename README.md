@@ -7,9 +7,9 @@ When you open the program for the first time it will generate two folders Plugin
 automatically! (If you want to add or remove a plugin for the server you need to click Delete Plugins Folder)
 
 ## Supported OS
-Windows ✔️
-Linux  (Requieres Mono) ✔️
-MacOS ❌
+- Windows ✔️
+- Linux  (Requieres Mono) ✔️
+- MacOS ❌
 
 ## Need Support?
 Write to my discord: PoliZZZ#0812
