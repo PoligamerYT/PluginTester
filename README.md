@@ -14,6 +14,6 @@ automatically! (If you want to add or remove a plugin for the server you need to
 Write to my discord: PoliZZZ#0812
 
 ## Screenshot:
-![Screenshot](https://i.imgur.com/gG2jYkr.png)
+![Screenshot](https://i.imgur.com/CzN2CYl.png)
 
 [Mono]: <https://www.mono-project.com/>
