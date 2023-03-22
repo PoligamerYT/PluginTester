@@ -12,7 +12,7 @@ namespace PluginTester
 {
     internal static class Program
     {
-        public static string Version = "1.1";
+        public static double Version = 1.1;
         public static LanguageManager LanguageManager;
         public static string Path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
@@ -50,15 +50,15 @@ namespace PluginTester
                     try
                     {
                         var url = "https://raw.githubusercontent.com/PoligamerYT/PluginTester/master/LastVersion.txt";
-                        string version = string.Empty;
+                        double version = 0;
 
                         using (WebClient webClient = new WebClient()) 
                         {
-                            webClient.UseDefaultCredentials = true;
-                            version = webClient.DownloadString(url);
+                            byte[] raw = webClient.DownloadData(url);
+                            version = Convert.ToDouble(System.Text.Encoding.UTF8.GetString(raw));
                         }
 
-                        if (!Version.Equals(version))
+                        if (!version.Equals(Version))
                         {
                             MessageBoxManager.OK = "Visit";
                             MessageBoxManager.Cancel = "Ok";
