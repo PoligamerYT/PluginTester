@@ -10,6 +10,9 @@ automatically! (If you want to add or remove a plugin for the server you need to
 - Linux  (Requieres [Mono]) ✔️
 - MacOS ❌
 
+## Want More Languages?
+Help us translate the program! [Click Here]
+
 ## Need Support?
 Write to my discord: PoliZZZ#0812
 
@@ -17,3 +20,4 @@ Write to my discord: PoliZZZ#0812
 ![Screenshot](https://i.imgur.com/CzN2CYl.png)
 
 [Mono]: <https://www.mono-project.com/>
+[Click Here]: <https://crowdin.com/project/plugin-tester/invite?h=21f415990a610f3f4665d32275ec62c11646597>
