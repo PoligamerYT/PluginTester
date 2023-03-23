@@ -13,7 +13,8 @@
     "1.9",
     "1.8"
   ],
-  "BukkitOrSpigotURL": "https://download.getbukkit.org/<type>/<type>-<version>.jar",
+  "BukkitOrSpigotURL": "https://download.getbukkit.org/",
+  "OtherBukkitOrSpigotURL": "https://cdn.getbukkit.org/",
   "PaperVersions": {
     "1.8": "https://api.papermc.io/v2/projects/paper/versions/1.8.8/builds/445/downloads/paper-1.8.8-445.jar",
     "1.9": "https://api.papermc.io/v2/projects/paper/versions/1.9.4/builds/775/downloads/paper-1.9.4-775.jar",
