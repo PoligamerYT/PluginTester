@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -12,9 +13,9 @@ namespace PluginTester
 {
     internal static class Program
     {
-        public static double Version = 1.1;
+        public static readonly Version Version = new Version(1, 1);
         public static LanguageManager LanguageManager;
-        public static string Path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        public static Utils Utils;
 
         /// <summary>
         /// Punto de entrada principal para la aplicación.
@@ -24,24 +25,20 @@ namespace PluginTester
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
+                Utils = new Utils();
                 LanguageManager = new LanguageManager();
 
                 FirstLanguageCheck();
 
-                if (File.Exists(System.IO.Path.Combine(Path, "Config.json")))
+                if (File.Exists(Utils.ConfigPath))
                 {
-                    using (StreamReader sr = File.OpenText(System.IO.Path.Combine(Path, "Config.json")))
+                    string json = File.ReadAllText(Utils.ConfigPath);
+
+                    Configuration configuration = Utils.JsonToObject<Configuration>(json);
+
+                    if (!LanguageManager.LoadLanguageFromName(configuration.SelectedLanguage, LanguageManager))
                     {
-                        string json = sr.ReadToEnd();
-
-                        Configuration configuration = JsonConvert.DeserializeObject<Configuration>(json);
-
-                        if (!LanguageManager.LoadLanguageFromName(configuration.SelectedLanguage)) 
-                        {
-                            FirstLanguageCheck();
-                        }
-
-                        sr.Close();
+                        FirstLanguageCheck();
                     }
                 }
 
@@ -49,24 +46,23 @@ namespace PluginTester
                 {
                     try
                     {
-                        var url = "https://raw.githubusercontent.com/PoligamerYT/PluginTester/master/LastVersion.txt";
-                        double version = 0;
-
-                        using (WebClient webClient = new WebClient()) 
+                        Version latestVersion;
+                        using (WebClient webClient = new WebClient())
                         {
-                            byte[] raw = webClient.DownloadData(url);
-                            version = Convert.ToDouble(System.Text.Encoding.UTF8.GetString(raw));
+                            byte[] raw = webClient.DownloadData(URL.LastVersionUrl);
+                            string versionString = System.Text.Encoding.UTF8.GetString(raw);
+                            latestVersion = Version.Parse(versionString);
                         }
 
-                        if (!version.Equals(Version))
+                        if (latestVersion.CompareTo(Version) > 0)
                         {
                             MessageBoxManager.OK = "Visit";
                             MessageBoxManager.Cancel = "Ok";
                             MessageBoxManager.Register();
-                            DialogResult result = MessageBox.Show(LanguageManager.NewUpdateMessage.Replace("<url>", "https://www.spigotmc.org/resources/plugin-tester.108280/"), "Update Cheker", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                            DialogResult result = MessageBox.Show(LanguageManager.NewUpdateMessage.Replace("<url>", URL.ResourceUrl), "Update Cheker", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                             if (result == DialogResult.OK) 
                             {
-                                Process.Start("https://www.spigotmc.org/resources/plugin-tester.108280/");
+                                Process.Start(URL.ResourceUrl);
                             }
                             MessageBoxManager.Unregister();
                         }
@@ -81,7 +77,7 @@ namespace PluginTester
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Form1(LanguageManager));
+                Application.Run(new Form1(LanguageManager, Utils));
             }
             else
             {
@@ -92,25 +88,26 @@ namespace PluginTester
         public static void SetupDefaultLanguage(LanguageManager language)
         {
             language.LanguageName = "English";
-            language.NewUpdateMessage = $"There is a new update dowload it from here <url>";
+            language.NewUpdateMessage = $"There is a new update download it from here <url>";
             language.OSNotSupportedMessage = "Your current OS is not supported!";
-            language.UnableToCheckUpdateMessage = "Unable to chek for updates: <error>";
+            language.UnableToCheckUpdateMessage = "Unable to check for updates: <error>";
             language.SelectJavaTitle = "Select Java";
             language.JavaArgumentsTitle = "Java Arguments";
             language.VersionTitle = "Version";
             language.ServerTypeTitle = "Server Type";
-            language.DowloadProgressTitle = "Dowload Progress";
+            language.DownloadProgressTitle = "Download Progress";
             language.DeletePluginsFolderTitle = "Delete Plugins Folder";
             language.TestTitle = "Test";
             language.LanguageTitle = "Language";
             language.NotSelectedJavaMessage = "Select Java First Please";
+            language.VersionListErrorMessage = "Cant contact with the server pls try later!";
         }
 
         public static void FirstLanguageCheck()
         {
-            if (Directory.Exists(System.IO.Path.Combine(Path, "Languages")))
+            if (Directory.Exists(Utils.LanguagesPath))
             {
-                if (Directory.GetFiles(System.IO.Path.Combine(Path, "Languages")).ToList().Count == 0)
+                if (Directory.GetFiles(Utils.LanguagesPath).ToList().Count == 0)
                 {
                     LanguageManager language = new LanguageManager();
 
@@ -118,21 +115,18 @@ namespace PluginTester
 
                     string json = JsonConvert.SerializeObject(language, Formatting.Indented);
 
-                    File.WriteAllText(System.IO.Path.Combine(Path, "Languages", language.LanguageName + ".json"), json);
+                    File.WriteAllText(Path.Combine(Utils.LanguagesPath, language.LanguageName + ".json"), json);
 
                     LanguageManager = language;
                 }
                 else
                 {
-                    if (LanguageManager == null)
-                    {
-                        if (LanguageManager.LoadFirstLanguage()) { }
-                    }
+                    LanguageManager.LoadFirstLanguage(LanguageManager);
                 }
             }
             else
             {
-                Directory.CreateDirectory(System.IO.Path.Combine(Path, "Languages"));
+                Directory.CreateDirectory(Utils.LanguagesPath);
 
                 LanguageManager language = new LanguageManager();
 
@@ -140,7 +134,7 @@ namespace PluginTester
 
                 string json = JsonConvert.SerializeObject(language, Formatting.Indented);
 
-                File.WriteAllText(System.IO.Path.Combine(Path, "Languages", language.LanguageName + ".json"), json);
+                File.WriteAllText(Path.Combine(Utils.LanguagesPath, language.LanguageName + ".json"), json);
 
                 LanguageManager = language;
             }

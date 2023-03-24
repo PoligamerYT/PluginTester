@@ -15,16 +15,25 @@ namespace PluginTester
         public string JavaArgumentsTitle { get; set; }
         public string VersionTitle { get; set; }
         public string ServerTypeTitle { get; set; }
-        public string DowloadProgressTitle { get; set; }
+        public string DownloadProgressTitle { get; set; }
         public string DeletePluginsFolderTitle { get; set; }
         public string TestTitle { get; set; }
         public string LanguageTitle { get; set; }
         public string NotSelectedJavaMessage { get; set; }
+        public string VersionListErrorMessage { get; set; }
 
-        public bool LoadLanguageFromName(string languageName)
+        [JsonIgnore]
+        public Utils Utils { get; set; }
+
+        public LanguageManager()
+        {
+            Utils = new Utils();
+        }
+
+        public bool LoadLanguageFromName(string languageName, LanguageManager originalLanguage)
         {
             string directoryPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            List<string> files = Directory.GetFiles(Path.Combine(directoryPath, "Languages")).ToList();
+            List<string> files = Directory.GetFiles(Utils.LanguagesPath).ToList();
             foreach (var file in files)
             {
                 try
@@ -34,19 +43,20 @@ namespace PluginTester
 
                     if(language.LanguageName == languageName)
                     {
-                        this.LanguageName = language.LanguageName;
-                        this.OSNotSupportedMessage = language.OSNotSupportedMessage;
-                        this.UnableToCheckUpdateMessage = language.NewUpdateMessage;
-                        this.NewUpdateMessage = language.NewUpdateMessage;
-                        this.SelectJavaTitle = language.SelectJavaTitle;
-                        this.JavaArgumentsTitle = language.JavaArgumentsTitle;
-                        this.VersionTitle = language.VersionTitle;
-                        this.ServerTypeTitle = language.ServerTypeTitle;
-                        this.DowloadProgressTitle = language.DowloadProgressTitle;
-                        this.TestTitle = language.TestTitle;
-                        this.LanguageTitle = language.LanguageTitle;
-                        this.DeletePluginsFolderTitle = language.DeletePluginsFolderTitle;
-                        this.NotSelectedJavaMessage = language.NotSelectedJavaMessage;
+                        originalLanguage.LanguageName = language.LanguageName;
+                        originalLanguage.OSNotSupportedMessage = language.OSNotSupportedMessage;
+                        originalLanguage.UnableToCheckUpdateMessage = language.UnableToCheckUpdateMessage;
+                        originalLanguage.NewUpdateMessage = language.NewUpdateMessage;
+                        originalLanguage.SelectJavaTitle = language.SelectJavaTitle;
+                        originalLanguage.JavaArgumentsTitle = language.JavaArgumentsTitle;
+                        originalLanguage.VersionTitle = language.VersionTitle;
+                        originalLanguage.ServerTypeTitle = language.ServerTypeTitle;
+                        originalLanguage.DownloadProgressTitle = language.DownloadProgressTitle;
+                        originalLanguage.TestTitle = language.TestTitle;
+                        originalLanguage.LanguageTitle = language.LanguageTitle;
+                        originalLanguage.DeletePluginsFolderTitle = language.DeletePluginsFolderTitle;
+                        originalLanguage.NotSelectedJavaMessage = language.NotSelectedJavaMessage;
+                        originalLanguage.VersionListErrorMessage = language.VersionListErrorMessage;
 
                         return true;
                     }
@@ -57,10 +67,10 @@ namespace PluginTester
             return false;
         }
 
-        public bool LoadFirstLanguage()
+        public bool LoadFirstLanguage(LanguageManager originalLanguage)
         {
             string directoryPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            List<string> files = Directory.GetFiles(Path.Combine(directoryPath, "Languages")).ToList();
+            List<string> files = Directory.GetFiles(Utils.LanguagesPath).ToList();
             foreach (var file in files)
             {
                 try
@@ -68,19 +78,20 @@ namespace PluginTester
                     string json = File.ReadAllText(file);
                     LanguageManager language = JsonConvert.DeserializeObject<LanguageManager>(json);
 
-                    this.LanguageName = language.LanguageName;
-                    this.OSNotSupportedMessage = language.OSNotSupportedMessage;
-                    this.UnableToCheckUpdateMessage = language.NewUpdateMessage;
-                    this.NewUpdateMessage = language.NewUpdateMessage;
-                    this.SelectJavaTitle = language.SelectJavaTitle;
-                    this.JavaArgumentsTitle = language.JavaArgumentsTitle;
-                    this.VersionTitle = language.VersionTitle;
-                    this.ServerTypeTitle = language.ServerTypeTitle;
-                    this.DowloadProgressTitle = language.DowloadProgressTitle;
-                    this.TestTitle = language.TestTitle;
-                    this.LanguageTitle = language.LanguageTitle;
-                    this.DeletePluginsFolderTitle = language.DeletePluginsFolderTitle;
-                    this.NotSelectedJavaMessage = language.NotSelectedJavaMessage;
+                    originalLanguage.LanguageName = language.LanguageName;
+                    originalLanguage.OSNotSupportedMessage = language.OSNotSupportedMessage;
+                    originalLanguage.UnableToCheckUpdateMessage = language.UnableToCheckUpdateMessage;
+                    originalLanguage.NewUpdateMessage = language.NewUpdateMessage;
+                    originalLanguage.SelectJavaTitle = language.SelectJavaTitle;
+                    originalLanguage.JavaArgumentsTitle = language.JavaArgumentsTitle;
+                    originalLanguage.VersionTitle = language.VersionTitle;
+                    originalLanguage.ServerTypeTitle = language.ServerTypeTitle;
+                    originalLanguage.DownloadProgressTitle = language.DownloadProgressTitle;
+                    originalLanguage.TestTitle = language.TestTitle;
+                    originalLanguage.LanguageTitle = language.LanguageTitle;
+                    originalLanguage.DeletePluginsFolderTitle = language.DeletePluginsFolderTitle;
+                    originalLanguage.NotSelectedJavaMessage = language.NotSelectedJavaMessage;
+                    originalLanguage.VersionListErrorMessage = language.VersionListErrorMessage;
 
                     return true;
                 }
@@ -93,7 +104,7 @@ namespace PluginTester
         public List<string> GetLanguages() 
         {
             string directoryPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            List<string> files = Directory.GetFiles(Path.Combine(directoryPath, "Languages")).ToList();
+            List<string> files = Directory.GetFiles(Utils.LanguagesPath).ToList();
 
             List<string> names = new List<string>();
 
