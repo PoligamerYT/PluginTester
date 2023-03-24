@@ -13,7 +13,7 @@ namespace PluginTester
 {
     internal static class Program
     {
-        public static readonly Version Version = new Version(1, 1);
+        public static readonly Version Version = new Version(1, 2);
         public static LanguageManager LanguageManager;
         public static Utils Utils;
 

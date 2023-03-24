@@ -287,7 +287,7 @@ namespace PluginTester
         {
             string versionName = version;
 
-            if (float.Parse(version) <= 1.10)
+            if (version == "1.8" || version == "1.9" || version == "1.10")
             {
                 versionName += "-R0.1-SNAPSHOT-latest";
             }
