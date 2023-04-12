@@ -1,3 +1,5 @@
+![Screenshot](https://img.shields.io/github/downloads/PoligamerYT/PluginTester/total?color=lightgrey&label=Github%20dowloads&style=for-the-badge) ![Screenshot](https://img.shields.io/spiget/downloads/108280?color=yellow&label=Spigot%20dowloads&style=for-the-badge)
+
 # PluginTester
 This is a simple program made in C# that helps you test your plugin in different versions of the Game (1.8-1.19), creating servers in a specific Version and Server Type (Paper, Bukkit, Spigot) of your selection.
 
