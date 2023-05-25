@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PluginTester
 {
@@ -53,6 +54,51 @@ namespace PluginTester
         {
             var valueBytes = Convert.FromBase64String(value);
             return Encoding.UTF8.GetString(valueBytes);
+        }
+
+        public void ReverseComboBoxList<T>(ComboBox.ObjectCollection list)
+        {
+            if (list == null || list.Count <= 1)
+            {
+                return;
+            }
+
+            T value = (T)list[0];
+            list.RemoveAt(0);
+
+            ReverseComboBoxList<T>(list);
+
+            list.Add(value);
+        }
+
+        public string GetServerType(string type)
+        {
+            return type.Replace("+", "Plus");
+        }
+
+        public string GetJarType(string originalType)
+        {
+            string type = string.Empty;
+
+            string newType = originalType.Replace("+", "Plus");
+
+            switch (newType)
+            {
+                case "CraftBukkit":
+                    type = "bukkit";
+                    break;
+                case "PufferfishPlus":
+                    type = "pufferfishplus";
+                    break;
+                case "PufferfishPlus (Purpur)":
+                    type = "pufferfishpluspurpur";
+                    break;
+                default:
+                    type = newType.ToLower();
+                    break;
+            }
+
+            return type;
         }
     }
 }

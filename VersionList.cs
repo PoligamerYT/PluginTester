@@ -8,7 +8,13 @@ namespace PluginTester
 {
     public class VersionList
     {
-        public List<string> Versions;
         public Dictionary<string, string> PaperVersions;
+        public Dictionary<string, string> SpigotVersions;
+        public Dictionary<string, string> BukkitVersions;
+        public Dictionary<string, string> SpongeVersions;
+        public Dictionary<string, string> PurpurVersions;
+        public Dictionary<string, string> PufferfishVersions;
+        public Dictionary<string, string> PufferfishPlusVersions;
+        public Dictionary<string, string> PufferfishPlusPurpurVersions;
     }
 }

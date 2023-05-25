@@ -80,19 +80,6 @@
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "1.19",
-            "1.18",
-            "1.17",
-            "1.16",
-            "1.15",
-            "1.14",
-            "1.13",
-            "1.12",
-            "1.11",
-            "1.10",
-            "1.9",
-            "1.8"});
             this.comboBox2.Location = new System.Drawing.Point(22, 135);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(239, 33);
@@ -124,13 +111,19 @@
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
+            "Paper",
             "Spigot",
             "CraftBukkit",
-            "Paper"});
+            "Sponge",
+            "Purpur",
+            "Pufferfish",
+            "Pufferfish+",
+            "Pufferfish+ (Purpur)"});
             this.comboBox1.Location = new System.Drawing.Point(303, 135);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(239, 33);
             this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button1
             // 

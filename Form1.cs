@@ -1,10 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -32,6 +35,9 @@ namespace PluginTester
 
         private void OnLoadForm(object sender, EventArgs e)
         {
+            if (!CheckVersionsList())
+                Application.Exit();
+
             if (LoadLanguage(LanguageManager.LanguageName))
             {
                 if (!Directory.Exists(Utils.PluginsPath))
@@ -49,34 +55,47 @@ namespace PluginTester
                     Directory.CreateDirectory(Utils.DataPath);
                 }
 
-                if (!File.Exists(Utils.ConfigPath))
-                {
-                    Configuration configuration = new Configuration();
-                    configuration.JavaPath = JavaPath;
-                    configuration.JavaArgument = textBox1.Text;
-                    configuration.SelectedVersion = comboBox2.SelectedIndex;
-                    configuration.SelectedServerType = comboBox1.SelectedIndex;
-                    configuration.SelectedLanguage = comboBox3.Text;
-
-                    string json = Utils.ObjectToJson(configuration);
-
-                    File.WriteAllText(Utils.ConfigPath, json);
-                }
-                else
-                {
-                    string json = File.ReadAllText(Utils.ConfigPath);
-
-                    Configuration configuration = Utils.JsonToObject<Configuration>(json);
-
-                    JavaPath = configuration.JavaPath;
-                    textBox1.Text = configuration.JavaArgument;
-                    comboBox2.SelectedIndex = configuration.SelectedVersion;
-                    comboBox1.SelectedIndex = configuration.SelectedServerType;
-                    comboBox3.SelectedItem = configuration.SelectedLanguage;
-                }
-
                 PrepareForm();
+
+                LoadConfig();
+
+                ChangeVersions();
+
+                LoadConfig();
             }
+        }
+
+        public Configuration LoadConfig()
+        {
+            Configuration configuration = null;
+
+            if (!File.Exists(Utils.ConfigPath))
+            {
+                configuration = new Configuration();
+                configuration.JavaPath = JavaPath;
+                configuration.JavaArgument = textBox1.Text;
+                configuration.SelectedVersion = comboBox2.SelectedIndex;
+                configuration.SelectedServerType = comboBox1.SelectedIndex;
+                configuration.SelectedLanguage = comboBox3.Text;
+
+                string json = Utils.ObjectToJson(configuration);
+
+                File.WriteAllText(Utils.ConfigPath, json);
+            }
+            else
+            {
+                string json = File.ReadAllText(Utils.ConfigPath);
+
+                configuration = Utils.JsonToObject<Configuration>(json);
+
+                JavaPath = configuration.JavaPath;
+                textBox1.Text = configuration.JavaArgument;
+                comboBox1.SelectedIndex = configuration.SelectedServerType;
+                comboBox2.SelectedIndex = configuration.SelectedVersion;
+                comboBox3.SelectedItem = configuration.SelectedLanguage;
+            }
+
+            return configuration;
         }
 
         public void PrepareForm()
@@ -86,32 +105,14 @@ namespace PluginTester
                 comboBox3.Items.Add(name);
             }
 
-            if (CheckVersionsList())
-            {
-                comboBox2.Items.Clear();
+            this.Focus();
+            this.Activate();
+            this.BringToFront();
 
-                foreach (string versionName in VersionList.Versions)
-                {
-                    comboBox2.Items.Add(versionName);
-                }
-
-                this.Focus();
-                this.Activate();
-                this.BringToFront();
-
-                tabControl1.Appearance = TabAppearance.FlatButtons;
-                tabControl1.ItemSize = new Size(0, 1);
-                tabControl1.SizeMode = TabSizeMode.Fixed;
-                this.Size = new Size(this.Size.Width, this.Size.Height + 10);
-
-                comboBox2.SelectedIndex = 0;
-                comboBox1.SelectedIndex = 0;
-                comboBox3.SelectedIndex = 0;
-            }
-            else
-            {
-                Application.Exit();
-            }
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+            this.Size = new Size(this.Size.Width, this.Size.Height + 10);
         }
 
         public void PrepareServer()
@@ -126,37 +127,55 @@ namespace PluginTester
                 button1.Enabled = false;
                 button2.Enabled = false;  
                 button3.Enabled = false;
-                
-                if(!Directory.Exists(Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{comboBox2.Text}"))) 
+
+                string type = Utils.GetJarType(comboBox1.Text);
+                string newType = Utils.GetServerType(comboBox1.Text);
+
+                if (!Directory.Exists(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}"))) 
                 {
-                    Directory.CreateDirectory(Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{comboBox2.Text}"));
+                    Directory.CreateDirectory(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}"));
 
                     WebClient wc = new WebClient();
 
-                    switch (comboBox1.SelectedIndex)
+                    switch (comboBox1.Text)
                     {
-                        case 0:
-                            DowloadVersion(wc, comboBox1.Text, comboBox2.Text);
+                        case "Paper":
+                            DowloadVersion(wc, comboBox2.Text, VersionList.PaperVersions);
                             break;
-                        case 1:
-                            DowloadVersion(wc, comboBox1.Text, comboBox2.Text);
+                        case "Spigot":
+                            DowloadVersion(wc, comboBox2.Text, VersionList.SpigotVersions);
                             break;
-                        case 2:
-                            DowloadPaperVersion(wc, comboBox2.Text);
+                        case "CraftBukkit":
+                            DowloadVersion(wc, comboBox2.Text, VersionList.BukkitVersions);
+                            break;
+                        case "Sponge":
+                            DowloadVersion(wc, comboBox2.Text, VersionList.SpongeVersions);
+                            break;
+                        case "Purpur":
+                            DowloadVersion(wc, comboBox2.Text, VersionList.PurpurVersions);
+                            break;
+                        case "Pufferfish":
+                            DowloadVersion(wc, comboBox2.Text, VersionList.PufferfishVersions);
+                            break;
+                        case "Pufferfish+":
+                            DowloadVersion(wc, comboBox2.Text, VersionList.PufferfishPlusVersions);
+                            break;
+                        case "Pufferfish+ (Purpur)":
+                            DowloadVersion(wc, comboBox2.Text, VersionList.PufferfishPlusPurpurVersions);
                             break;
                     }
                 }
                 else
                 {
-                    if(!File.Exists(Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{comboBox2.Text}", $"{comboBox1.Text.ToLower()}-{comboBox2.Text}.jar")))
+                    if(!File.Exists(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}", $"{type}-{comboBox2.Text}.jar")))
                     {
-                        Directory.Delete(Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{comboBox2.Text}"), true);
+                        Directory.Delete(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}"), true);
                         PrepareServer();
                         return;
                     }
                     else
                     {
-                        SetupFiles(Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{comboBox2.Text}"), $"{comboBox1.Text.ToLower()}-{comboBox2.Text}.jar");
+                        SetupFiles(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}"), $"{type}-{comboBox2.Text}.jar");
 
                         StartServer();
                     }
@@ -176,9 +195,11 @@ namespace PluginTester
 
         public void StartServer()
         {
+            string newType = Utils.GetServerType(comboBox1.Text);
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                string filePathExecute = Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{comboBox2.Text}", "Start.sh");
+                string filePathExecute = Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}", "Start.sh");
                 FileInfo fileInfo = new FileInfo(filePathExecute);
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.CreateNoWindow = false;
@@ -189,7 +210,7 @@ namespace PluginTester
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                Process.Start(Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{comboBox2.Text}", "Start.bat"));
+                Process.Start(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}", "Start.bat"));
             }
 
             textBox1.Enabled = true;
@@ -283,41 +304,6 @@ namespace PluginTester
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        public void DowloadVersion(WebClient wc, string type, string version)
-        {
-            string versionName = version;
-
-            if (version == "1.8" || version == "1.9" || version == "1.10")
-            {
-                versionName += "-R0.1-SNAPSHOT-latest";
-            }
-
-            string url = $"{URL.BukkitOrSpigotURL}{type.ToLower()}/{type.ToLower()}-{versionName}.jar";
-
-            wc.DownloadProgressChanged += wc_DownloadProgressChanged;
-            wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-
-            if (!ServerWorking(url))
-            {
-                url = $"{URL.OtherBukkitOrSpigotURL}{type.ToLower()}/{type.ToLower()}-{versionName}.jar";
-            }
-
-            wc.DownloadFileAsync(new Uri(url), Path.Combine(Utils.ServersPath, $"{type}-{version}", $"{type.ToLower()}-{version}.jar"));
-            SetupFiles(Path.Combine(Utils.ServersPath, $"{type}-{version}"), $"{type.ToLower()}-{version}.jar");
-        }
-
-        public void DowloadPaperVersion(WebClient wc, string version)
-        {
-            string versionUrl = string.Empty;
-
-            VersionList.PaperVersions.TryGetValue(version, out versionUrl);
-
-            wc.DownloadProgressChanged += wc_DownloadProgressChanged;
-            wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-            wc.DownloadFileAsync(new Uri(versionUrl), Path.Combine(Utils.ServersPath, $"Paper-{version}", $"paper-{version}.jar"));
-            SetupFiles(Path.Combine(Utils.ServersPath, $"Paper-{version}"), $"paper-{version}.jar");
-        }
-
         public bool ServerWorking(string url)
         {
             try
@@ -385,6 +371,65 @@ namespace PluginTester
             }
         }
 
+        public void ChangeVersions()
+        {
+            comboBox2.Items.Clear();
+
+            switch (comboBox1.Text) 
+            {
+                case "Paper":
+                    foreach (string version in VersionList.PaperVersions.Keys)
+                    {
+                        comboBox2.Items.Add(version);
+                    }
+                    break;
+                case "Spigot":
+                    foreach (string version in VersionList.SpigotVersions.Keys)
+                    {
+                        comboBox2.Items.Add(version);
+                    }
+                    break;
+                case "CraftBukkit":
+                    foreach (string version in VersionList.BukkitVersions.Keys)
+                    {
+                        comboBox2.Items.Add(version);
+                    }
+                    break;
+                case "Sponge":
+                    foreach (string version in VersionList.SpongeVersions.Keys)
+                    {
+                        comboBox2.Items.Add(version);
+                    }
+                    break;
+                case "Purpur":
+                    foreach (string version in VersionList.PurpurVersions.Keys)
+                    {
+                        comboBox2.Items.Add(version);
+                    }
+                    break;
+                case "Pufferfish":
+                    foreach (string version in VersionList.PufferfishVersions.Keys)
+                    {
+                        comboBox2.Items.Add(version);
+                    }
+                    break;
+                case "Pufferfish+":
+                    foreach (string version in VersionList.PufferfishPlusVersions.Keys)
+                    {
+                        comboBox2.Items.Add(version);
+                    }
+                    break;
+                case "Pufferfish+ (Purpur)":
+                    foreach (string version in VersionList.PufferfishPlusPurpurVersions.Keys)
+                    {
+                        comboBox2.Items.Add(version);
+                    }
+                    break;
+            }
+
+            Utils.ReverseComboBoxList<string>(comboBox2.Items);
+        }
+
         #endregion
 
         #region FormFunctions
@@ -394,11 +439,18 @@ namespace PluginTester
             LoadLanguage(comboBox3.Text);
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangeVersions();
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{comboBox2.Text}", "Plugins")))
+            string newType = Utils.GetServerType(comboBox1.Text);
+
+            if (Directory.Exists(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}", "Plugins")))
             {
-                Directory.Delete(Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{comboBox2.Text}", "Plugins"), true);
+                Directory.Delete(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}", "Plugins"), true);
             }
         }
 
@@ -478,6 +530,53 @@ namespace PluginTester
             string json = Utils.ObjectToJson(configuration);
 
             File.WriteAllText(Utils.ConfigPath, json);
+        }
+
+        #endregion
+
+        #region Dowloads
+
+        public void DowloadPaperVersion(WebClient wc, string version)
+        {
+            string versionUrl = string.Empty;
+
+            VersionList.PaperVersions.TryGetValue(version, out versionUrl);
+
+            wc.DownloadProgressChanged += wc_DownloadProgressChanged;
+            wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
+            wc.DownloadFileAsync(new Uri(versionUrl), Path.Combine(Utils.ServersPath, $"Paper-{version}", $"paper-{version}.jar"));
+            SetupFiles(Path.Combine(Utils.ServersPath, $"Paper-{version}"), $"paper-{version}.jar");
+        }
+
+        public void DowloadVersion(WebClient wc, string version, Dictionary<string, string> versions)
+        {
+            string versionUrl = string.Empty;
+            string type = string.Empty;
+
+            string newType = comboBox1.Text.Replace("+", "Plus");
+
+            switch (newType)
+            {
+                case "CraftBukkit":
+                    type = "bukkit";
+                    break;
+                case "PufferfishPlus":
+                    type = "pufferfishplus";
+                    break;
+                case "PufferfishPlus (Purpur)":
+                    type = "pufferfishpluspurpur";
+                    break;
+                default:
+                    type = newType.ToLower();
+                    break;
+            }
+
+            versions.TryGetValue(version, out versionUrl);
+
+            wc.DownloadProgressChanged += wc_DownloadProgressChanged;
+            wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
+            wc.DownloadFileAsync(new Uri(versionUrl), Path.Combine(Utils.ServersPath, $"{newType}-{version}", $"{type}-{version}.jar"));
+            SetupFiles(Path.Combine(Utils.ServersPath, $"{newType}-{version}"), $"{type}-{version}.jar");
         }
 
         #endregion
