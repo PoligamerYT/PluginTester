@@ -340,6 +340,9 @@ namespace PluginTester
 
         public bool CheckVersionsList()
         {
+            if(!Directory.Exists(Utils.DataPath))
+                Directory.CreateDirectory(Utils.DataPath);
+
             try
             {
                 using (WebClient webClient = new WebClient())
@@ -353,8 +356,10 @@ namespace PluginTester
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
+
                 if (File.Exists(Utils.VersionsListPath))
                 {
                     VersionList = Utils.JsonToObject<VersionList>(File.ReadAllText(Utils.VersionsListPath));
