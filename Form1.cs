@@ -22,6 +22,7 @@ namespace PluginTester
         public LanguageManager LanguageManager;
         public Utils Utils;
         public VersionList VersionList;
+        public string SelectedServerPath = string.Empty;
 
         public Form1(LanguageManager language, Utils utils)
         {
@@ -131,9 +132,11 @@ namespace PluginTester
                 string type = Utils.GetJarType(comboBox1.Text);
                 string newType = Utils.GetServerType(comboBox1.Text);
 
-                if (!Directory.Exists(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}"))) 
+                SelectedServerPath = Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}");
+
+                if (!Directory.Exists(SelectedServerPath)) 
                 {
-                    Directory.CreateDirectory(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}"));
+                    Directory.CreateDirectory(SelectedServerPath);
 
                     WebClient wc = new WebClient();
 
@@ -167,19 +170,21 @@ namespace PluginTester
                 }
                 else
                 {
-                    if(!File.Exists(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}", $"{type}-{comboBox2.Text}.jar")))
+                    if(!File.Exists(Path.Combine(SelectedServerPath, $"{type}-{comboBox2.Text}.jar")))
                     {
-                        Directory.Delete(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}"), true);
+                        Directory.Delete(Path.Combine(SelectedServerPath), true);
                         PrepareServer();
                         return;
                     }
                     else
                     {
-                        SetupFiles(Path.Combine(Utils.ServersPath, $"{newType}-{comboBox2.Text}"), $"{type}-{comboBox2.Text}.jar");
+                        SetupFiles(Path.Combine(SelectedServerPath), $"{type}-{comboBox2.Text}.jar");
 
                         StartServer();
                     }
                 }
+
+
             }
             catch(Exception ex) 
             {
@@ -193,8 +198,18 @@ namespace PluginTester
             }
         }
 
+        public void CopyPlugins()
+        {
+            if (!Directory.Exists(Path.Combine(SelectedServerPath, "plugins")))
+            {
+                CopyAll(new DirectoryInfo(Utils.PluginsPath), new DirectoryInfo(Path.Combine(SelectedServerPath, "plugins")));
+            }
+        }
+
         public void StartServer()
         {
+            CopyPlugins();
+
             string newType = Utils.GetServerType(comboBox1.Text);
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
