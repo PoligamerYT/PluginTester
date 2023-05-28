@@ -13,7 +13,7 @@ namespace PluginTester
 {
     internal static class Program
     {
-        public static readonly Version Version = new Version(1, 4);
+        public static readonly Version Version = new Version(1, 5);
         public static LanguageManager LanguageManager;
         public static Utils Utils;
 
@@ -77,7 +77,7 @@ namespace PluginTester
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Form1(LanguageManager, Utils));
+                Application.Run(new Main(LanguageManager, Utils));
             }
             else
             {

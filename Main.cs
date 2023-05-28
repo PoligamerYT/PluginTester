@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace PluginTester
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         public string JavaPath = string.Empty;
         public bool Loading = false;
@@ -24,7 +24,7 @@ namespace PluginTester
         public VersionList VersionList;
         public string SelectedServerPath = string.Empty;
 
-        public Form1(LanguageManager language, Utils utils)
+        public Main(LanguageManager language, Utils utils)
         {
             InitializeComponent();
 
@@ -261,6 +261,8 @@ namespace PluginTester
                 }
                 else
                 {
+                    File.Delete(Path.Combine(directory, "Start.sh"));
+
                     string first = textBox1.Text.Replace("<Java>", $"\"{JavaPath}\"");
                     string second = first.Replace("<Jar>", version);
 
@@ -276,8 +278,10 @@ namespace PluginTester
 
                     File.WriteAllText(Path.Combine(directory, "Start.bat"), $"cd \"{directory}\" \r\n{second} \r\npause");
                 }
-                else if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                else
                 {
+                    File.Delete(Path.Combine(directory, "Start.bat"));
+
                     string first = textBox1.Text.Replace("<Java>", $"\"{JavaPath}\"");
                     string second = first.Replace("<Jar>", version);
 
@@ -600,5 +604,10 @@ namespace PluginTester
         }
 
         #endregion
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
