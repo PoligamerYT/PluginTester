@@ -35,7 +35,8 @@
     "1.19.3": "https://api.papermc.io/v2/projects/paper/versions/1.19.3/builds/448/downloads/paper-1.19.3-448.jar",
     "1.19.4": "https://api.papermc.io/v2/projects/paper/versions/1.19.4/builds/550/downloads/paper-1.19.4-550.jar",
     "1.20": "https://api.papermc.io/v2/projects/paper/versions/1.20/builds/17/downloads/paper-1.20-17.jar",
-    "1.20.1": "https://api.papermc.io/v2/projects/paper/versions/1.20.1/builds/116/downloads/paper-1.20.1-116.jar"
+    "1.20.1": "https://api.papermc.io/v2/projects/paper/versions/1.20.1/builds/196/downloads/paper-1.20.1-196.jar",
+    "1.20.2": "https://api.papermc.io/v2/projects/paper/versions/1.20.2/builds/207/downloads/paper-1.20.2-207.jar"
   },
   "SpigotVersions": {
     "1.4.6": "https://cdn.getbukkit.org/spigot/spigot-1.4.6-R0.4-SNAPSHOT.jar",
@@ -182,14 +183,16 @@
     "1.19.3": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.19.3-10.0.0-RC1277/spongevanilla-1.19.3-10.0.0-RC1277-universal.jar",
     "1.19.4": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.19.4-10.0.0-RC1354/spongevanilla-1.19.4-10.0.0-RC1354-universal.jar",
     "1.20": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.1-11.0.0-RC1356/spongevanilla-1.20.1-11.0.0-RC1356-universal.jar",
-    "1.20.1": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.1-11.0.0-RC1356/spongevanilla-1.20.1-11.0.0-RC1356-universal.jar"
+    "1.20.1": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.1-11.0.0-RC1365/spongevanilla-1.20.1-11.0.0-RC1365-universal.jar",
+    "1.20.2": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.2-11.0.0-RC1375/spongevanilla-1.20.2-11.0.0-RC1375-universal.jar"
   },
   "PurpurVersions": {
     "1.16.5": "https://api.purpurmc.org/v2/purpur/1.16.5/1171/download",
     "1.17.1": "https://api.purpurmc.org/v2/purpur/1.17.1/1428/download",
     "1.18.2": "https://api.purpurmc.org/v2/purpur/1.18.2/1632/download",
     "1.19.4": "https://api.purpurmc.org/v2/purpur/1.19.4/1985/download",
-    "1.20.1": "https://api.purpurmc.org/v2/purpur/1.20.1/2028/download"
+    "1.20.1": "https://api.purpurmc.org/v2/purpur/1.20.1/2062/download",
+    "1.20.2": "https://api.purpurmc.org/v2/purpur/1.20.2/2068/download"
   },
   "PufferfishVersions": {
     "1.17.1": "https://ci.pufferfish.host/job/Pufferfish-1.17/22/artifact/build/libs/Pufferfish-1.17.1-R0.1-SNAPSHOT.jar",
