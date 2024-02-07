@@ -16,7 +16,7 @@ automatically! (If you want to add or remove a plugin for the server you need to
 Help us translate the program! [Click Here]
 
 ## Need Support?
-Write to my discord: PoliZZZ#0812
+Write to my discord: PoliZZZ
 
 ## Screenshot:
 ![Screenshot](https://i.imgur.com/CzN2CYl.png)
