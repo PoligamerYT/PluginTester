@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -159,12 +159,6 @@ namespace PluginTester
                             break;
                         case "Pufferfish":
                             DowloadVersion(wc, comboBox2.Text, VersionList.PufferfishVersions);
-                            break;
-                        case "Pufferfish+":
-                            DowloadVersion(wc, comboBox2.Text, VersionList.PufferfishPlusVersions);
-                            break;
-                        case "Pufferfish+ (Purpur)":
-                            DowloadVersion(wc, comboBox2.Text, VersionList.PufferfishPlusPurpurVersions);
                             break;
                     }
                 }
@@ -437,18 +431,6 @@ namespace PluginTester
                         comboBox2.Items.Add(version);
                     }
                     break;
-                case "Pufferfish+":
-                    foreach (string version in VersionList.PufferfishPlusVersions.Keys)
-                    {
-                        comboBox2.Items.Add(version);
-                    }
-                    break;
-                case "Pufferfish+ (Purpur)":
-                    foreach (string version in VersionList.PufferfishPlusPurpurVersions.Keys)
-                    {
-                        comboBox2.Items.Add(version);
-                    }
-                    break;
             }
 
             Utils.ReverseComboBoxList<string>(comboBox2.Items);
@@ -577,21 +559,13 @@ namespace PluginTester
             string versionUrl = string.Empty;
             string type = string.Empty;
 
-            string newType = comboBox1.Text.Replace("+", "Plus");
-
-            switch (newType)
+            switch (comboBox1.Text)
             {
                 case "CraftBukkit":
                     type = "bukkit";
                     break;
-                case "PufferfishPlus":
-                    type = "pufferfishplus";
-                    break;
-                case "PufferfishPlus (Purpur)":
-                    type = "pufferfishpluspurpur";
-                    break;
                 default:
-                    type = newType.ToLower();
+                    type = comboBox1.Text.ToLower();
                     break;
             }
 
@@ -599,8 +573,8 @@ namespace PluginTester
 
             wc.DownloadProgressChanged += wc_DownloadProgressChanged;
             wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-            wc.DownloadFileAsync(new Uri(versionUrl), Path.Combine(Utils.ServersPath, $"{newType}-{version}", $"{type}-{version}.jar"));
-            SetupFiles(Path.Combine(Utils.ServersPath, $"{newType}-{version}"), $"{type}-{version}.jar");
+            wc.DownloadFileAsync(new Uri(versionUrl), Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{version}", $"{type}-{version}.jar"));
+            SetupFiles(Path.Combine(Utils.ServersPath, $"{comboBox1.Text}-{version}"), $"{type}-{version}.jar");
         }
 
         #endregion

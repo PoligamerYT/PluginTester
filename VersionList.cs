@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,5 @@ namespace PluginTester
         public Dictionary<string, string> SpongeVersions;
         public Dictionary<string, string> PurpurVersions;
         public Dictionary<string, string> PufferfishVersions;
-        public Dictionary<string, string> PufferfishPlusVersions;
-        public Dictionary<string, string> PufferfishPlusPurpurVersions;
     }
 }

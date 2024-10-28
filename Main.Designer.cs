@@ -116,9 +116,7 @@
             "CraftBukkit",
             "Sponge",
             "Purpur",
-            "Pufferfish",
-            "Pufferfish+",
-            "Pufferfish+ (Purpur)"});
+            "Pufferfish"});
             this.comboBox1.Location = new System.Drawing.Point(303, 135);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(239, 33);
