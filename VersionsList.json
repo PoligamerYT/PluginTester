@@ -37,7 +37,11 @@
     "1.20": "https://api.papermc.io/v2/projects/paper/versions/1.20/builds/17/downloads/paper-1.20-17.jar",
     "1.20.1": "https://api.papermc.io/v2/projects/paper/versions/1.20.1/builds/196/downloads/paper-1.20.1-196.jar",
     "1.20.2": "https://api.papermc.io/v2/projects/paper/versions/1.20.2/builds/318/downloads/paper-1.20.2-318.jar",
-    "1.20.4": "https://api.papermc.io/v2/projects/paper/versions/1.20.4/builds/409/downloads/paper-1.20.4-409.jar"
+    "1.20.4": "https://api.papermc.io/v2/projects/paper/versions/1.20.4/builds/497/downloads/paper-1.20.4-497.jar",
+    "1.20.5": "https://api.papermc.io/v2/projects/paper/versions/1.20.5/builds/22/downloads/paper-1.20.5-22.jar",
+    "1.20.6": "https://api.papermc.io/v2/projects/paper/versions/1.20.6/builds/150/downloads/paper-1.20.6-150.jar",
+    "1.21": "https://api.papermc.io/v2/projects/paper/versions/1.21/builds/130/downloads/paper-1.21-130.jar",
+    "1.21.1": "https://api.papermc.io/v2/projects/paper/versions/1.21.1/builds/128/downloads/paper-1.21.1-128.jar"
   },
   "SpigotVersions": {
     "1.4.6": "https://cdn.getbukkit.org/spigot/spigot-1.4.6-R0.4-SNAPSHOT.jar",
@@ -97,7 +101,9 @@
     "1.19.4": "https://download.getbukkit.org/spigot/spigot-1.19.4.jar",
     "1.20.1": "https://download.getbukkit.org/spigot/spigot-1.20.1.jar",
     "1.20.2": "https://download.getbukkit.org/spigot/spigot-1.20.2.jar",
-    "1.20.4": "https://download.getbukkit.org/spigot/spigot-1.20.4.jar"
+    "1.20.4": "https://download.getbukkit.org/spigot/spigot-1.20.4.jar",
+    "1.20.6": "https://download.getbukkit.org/spigot/spigot-1.20.6.jar",
+    "1.21": "https://download.getbukkit.org/spigot/spigot-1.21.jar"
   },
   "BukkitVersions": {
     "1.0.0": "https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.0.0-SNAPSHOT.jar",
@@ -169,7 +175,9 @@
     "1.19.4": "https://download.getbukkit.org/craftbukkit/craftbukkit-1.19.4.jar",
     "1.20.1": "https://download.getbukkit.org/craftbukkit/craftbukkit-1.20.1.jar",
     "1.20.2": "https://download.getbukkit.org/craftbukkit/craftbukkit-1.20.2.jar",
-    "1.20.4": "https://download.getbukkit.org/craftbukkit/craftbukkit-1.20.4.jar"
+    "1.20.4": "https://download.getbukkit.org/craftbukkit/craftbukkit-1.20.4.jar",
+    "1.20.6": "https://download.getbukkit.org/craftbukkit/craftbukkit-1.20.6.jar",
+    "1.21": "https://download.getbukkit.org/craftbukkit/craftbukkit-1.21.jar"
   },
   "SpongeVersions": {
     "1.8.9": "https://repo.spongepowered.org/repository/legacy-transfer/org/spongepowered/spongevanilla/1.8.9-4.2.0-BETA-352/spongevanilla-1.8.9-4.2.0-BETA-352.jar",
@@ -189,34 +197,59 @@
     "1.19.4": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.19.4-10.0.0-RC1354/spongevanilla-1.19.4-10.0.0-RC1354-universal.jar",
     "1.20": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.1-11.0.0-RC1356/spongevanilla-1.20.1-11.0.0-RC1356-universal.jar",
     "1.20.1": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.1-11.0.0-RC1365/spongevanilla-1.20.1-11.0.0-RC1365-universal.jar",
-    "1.20.2": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.2-11.0.0-RC1471/spongevanilla-1.20.2-11.0.0-RC1471-universal.jar"
+    "1.20.2": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.2-11.0.0-RC1478/spongevanilla-1.20.2-11.0.0-RC1478-universal.jar",
+    "1.20.4": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.4-11.0.0-RC1589/spongevanilla-1.20.4-11.0.0-RC1589-universal.jar",
+    "1.20.6": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.6-11.0.0/spongevanilla-1.20.6-11.0.0-universal.jar",
+    "1.21": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.21.3-13.0.0-RC1874/spongevanilla-1.21.3-13.0.0-RC1874-universal.jar",
+    "1.21.1": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.21.1-12.0.0-RC1878/spongevanilla-1.21.1-12.0.0-RC1878-universal.jar",
+    "1.21.2": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.21.2-13.0.0-RC1868/spongevanilla-1.21.2-13.0.0-RC1868-universal.jar",
+    "1.21.3": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.21.3-13.0.0-RC1874/spongevanilla-1.21.3-13.0.0-RC1874-universal.jar"
   },
   "PurpurVersions": {
+    "1.14.1": "https://api.purpurmc.org/v2/purpur/1.14.1/latest/download",
+    "1.14.2": "https://api.purpurmc.org/v2/purpur/1.14.2/latest/download",
+    "1.14.3": "https://api.purpurmc.org/v2/purpur/1.14.3/latest/download",
+    "1.14.4": "https://api.purpurmc.org/v2/purpur/1.14.4/latest/download",
+    "1.15": "https://api.purpurmc.org/v2/purpur/1.15/latest/download",
+    "1.15.1": "https://api.purpurmc.org/v2/purpur/1.15.1/latest/download",
+    "1.15.2": "https://api.purpurmc.org/v2/purpur/1.15.2/latest/download",
+    "1.16.1": "https://api.purpurmc.org/v2/purpur/1.16.1/latest/download",
+    "1.16.2": "https://api.purpurmc.org/v2/purpur/1.16.2/latest/download",
+    "1.16.3": "https://api.purpurmc.org/v2/purpur/1.16.3/latest/download",
+    "1.16.4": "https://api.purpurmc.org/v2/purpur/1.16.4/latest/download",
     "1.16.5": "https://api.purpurmc.org/v2/purpur/1.16.5/latest/download",
+    "1.17": "https://api.purpurmc.org/v2/purpur/1.17/latest/download",
     "1.17.1": "https://api.purpurmc.org/v2/purpur/1.17.1/latest/download",
+    "1.18": "https://api.purpurmc.org/v2/purpur/1.18/latest/download",
+    "1.18.1": "https://api.purpurmc.org/v2/purpur/1.18.1/latest/download",
     "1.18.2": "https://api.purpurmc.org/v2/purpur/1.18.2/latest/download",
+    "1.19": "https://api.purpurmc.org/v2/purpur/1.19/latest/download",
+    "1.19.1": "https://api.purpurmc.org/v2/purpur/1.19.1/latest/download",
+    "1.19.2": "https://api.purpurmc.org/v2/purpur/1.19.2/latest/download",
+    "1.19.3": "https://api.purpurmc.org/v2/purpur/1.19.3/latest/download",
     "1.19.4": "https://api.purpurmc.org/v2/purpur/1.19.4/latest/download",
+    "1.20": "https://api.purpurmc.org/v2/purpur/1.20/latest/download",
     "1.20.1": "https://api.purpurmc.org/v2/purpur/1.20.1/latest/download",
     "1.20.2": "https://api.purpurmc.org/v2/purpur/1.20.2/latest/download",
-    "1.20.4": "https://api.purpurmc.org/v2/purpur/1.20.4/latest/download"
+    "1.20.4": "https://api.purpurmc.org/v2/purpur/1.20.4/latest/download",
+    "1.20.6": "https://api.purpurmc.org/v2/purpur/1.20.6/latest/download",
+    "1.21": "https://api.purpurmc.org/v2/purpur/1.21/latest/download",
+    "1.21.1": "https://api.purpurmc.org/v2/purpur/1.21.1/latest/download"
   },
   "PufferfishVersions": {
     "1.17.1": "https://ci.pufferfish.host/job/Pufferfish-1.17/22/artifact/build/libs/Pufferfish-1.17.1-R0.1-SNAPSHOT.jar",
+    "1.18": "https://ci.pufferfish.host/job/Pufferfish-1.18/11/artifact/build/libs/pufferfish-paperclip-1.18-R0.1-SNAPSHOT-reobf.jar",
+    "1.18.1": "https://ci.pufferfish.host/job/Pufferfish-1.18/47/artifact/build/libs/pufferfish-paperclip-1.18.1-R0.1-SNAPSHOT-reobf.jar",
     "1.18.2": "https://ci.pufferfish.host/job/Pufferfish-1.18/72/artifact/build/libs/pufferfish-paperclip-1.18.2-R0.1-SNAPSHOT-reobf.jar",
+    "1.19": "https://ci.pufferfish.host/job/Pufferfish-1.19/25/artifact/build/libs/pufferfish-paperclip-1.19-R0.1-SNAPSHOT-reobf.jar",
+    "1.19.1": "https://ci.pufferfish.host/job/Pufferfish-1.19/29/artifact/build/libs/pufferfish-paperclip-1.19.1-R0.1-SNAPSHOT-reobf.jar",
+    "1.19.2": "https://ci.pufferfish.host/job/Pufferfish-1.19/47/artifact/build/libs/pufferfish-paperclip-1.19.2-R0.1-SNAPSHOT-reobf.jar",
+    "1.19.3": "https://ci.pufferfish.host/job/Pufferfish-1.19/61/artifact/build/libs/pufferfish-paperclip-1.19.3-R0.1-SNAPSHOT-reobf.jar",
     "1.19.4": "https://ci.pufferfish.host/job/Pufferfish-1.19/73/artifact/build/libs/pufferfish-paperclip-1.19.4-R0.1-SNAPSHOT-reobf.jar",
     "1.20.1": "https://ci.pufferfish.host/job/Pufferfish-1.20/27/artifact/build/libs/pufferfish-paperclip-1.20.1-R0.1-SNAPSHOT-reobf.jar",
     "1.20.2": "https://ci.pufferfish.host/job/Pufferfish-1.20/35/artifact/build/libs/pufferfish-paperclip-1.20.2-R0.1-SNAPSHOT-reobf.jar",
-    "1.20.4": "https://ci.pufferfish.host/job/Pufferfish-1.20/44/artifact/build/libs/pufferfish-paperclip-1.20.4-R0.1-SNAPSHOT-reobf.jar"
-  },
-  "PufferfishPlusVersions": {
-    "1.18.2": "https://ci.pufferfish.host/job/PufferfishPlus-1.18/19/artifact/pufferfishplus-1.18.2.jar",
-    "1.19.4": "https://ci.pufferfish.host/job/PufferfishPlus-1.19/61/artifact/pufferfishplus-1.19.jar",
-    "1.20.1": "https://ci.pufferfish.host/job/PufferfishPlus-1.20/21/artifact/pufferfishplus-1.20.jar",
-    "1.20.2": "https://ci.pufferfish.host/job/PufferfishPlus-1.20/32/artifact/pufferfishplus-1.20.jar",
-    "1.20.4": "https://ci.pufferfish.host/job/PufferfishPlus-1.20/38/artifact/pufferfishplus-1.20.jar"
-  },
-  "PufferfishPlusPurpurVersions": {
-    "1.18.2": "https://ci.pufferfish.host/job/PufferfishPlus-1.18-Purpur/18/artifact/pufferfishplus-1.18.2-purpur.jar",
-    "1.19.4": "https://ci.pufferfish.host/job/PufferfishPlus-1.19-Purpur/19/artifact/pufferfishplus-1.19.jar"
+    "1.20.4": "https://ci.pufferfish.host/job/Pufferfish-1.20/52/artifact/build/libs/pufferfish-paperclip-1.20.4-R0.1-SNAPSHOT-reobf.jar",
+    "1.21": "https://ci.pufferfish.host/job/Pufferfish-1.21/8/artifact/build/libs/pufferfish-paperclip-1.21-R0.1-SNAPSHOT-mojmap.jar",
+    "1.21.1": "https://ci.pufferfish.host/job/Pufferfish-1.21/21/artifact/build/libs/pufferfish-paperclip-1.21.1-R0.1-SNAPSHOT-mojmap.jar"
   }
 }
