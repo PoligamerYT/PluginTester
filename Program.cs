@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -13,7 +13,7 @@ namespace PluginTester
 {
     internal static class Program
     {
-        public static readonly Version Version = new Version(1, 5);
+        public static readonly Version Version = new Version(1, 6);
         public static LanguageManager LanguageManager;
         public static Utils Utils;
 
